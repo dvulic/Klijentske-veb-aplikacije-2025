@@ -1,0 +1,30 @@
+<div class="spinner-container" *ngIf="!movies && !error">
+  <mat-spinner diameter="200"></mat-spinner>
+  <h3>Prikupljamo podatke o filmovima...</h3>
+</div>
+
+<div class="movieList" *ngIf="movies">
+  <mat-card *ngFor="let movie of movies" class="example-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{movie.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{movie.poster}}" alt="Movie poster">
+    <mat-card-content>
+      <p>
+        {{movie.shortDescription}}
+      </p>
+
+      <div class="genres">
+        <button mat-button class="genre-button" *ngFor="let genre of movie.movieGenres">{{genre.genre.name}}</button>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button><i class="fa-solid fa-ticket"></i> Dodaj u korpu</button>
+      <a mat-button href="/movie/{{movie.shortUrl}}">Detaljnije</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+

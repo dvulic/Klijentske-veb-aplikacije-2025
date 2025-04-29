@@ -1,0 +1,19 @@
+<div class="login-container">
+  <h2>Prijava</h2>
+  <form class="login-form">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" id="username" name="username" required placeholder="Vaša mejl adresa" [(ngModel)]="email"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Lozinka</mat-label>
+      <input matInput type="password" id="password" name="password" required placeholder="Vaša šifra" [(ngModel)]="password"/>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="btn" (click)="login()">Prijava</button>
+  </form>
+  <p class="redirect">
+    Nemate nalog? <a routerLink="/register">Registruje se ovde</a>
+  </p>
+</div>

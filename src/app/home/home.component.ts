@@ -1,0 +1,53 @@
+import { Component } from '@angular/core';
+import {JsonPipe, NgFor, NgIf} from "@angular/common";
+import {AxiosError} from "axios";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {ModelMovie} from "../../model/model.movie";
+import {MovieService} from "../../services/movieService";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
+
+
+
+@Component({
+  selector: 'app-home',
+  imports: [
+    // JsonPipe,
+    NgIf,
+    NgFor,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinner
+  ],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
+})
+export class HomeComponent {
+  public movies: ModelMovie[] | null = null
+  public error : string | null = null
+
+  constructor() {
+    MovieService.getMovies()
+    .then(
+        rsp => this.movies = rsp.data
+    )
+    .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`)
+  }
+
+  getGenreIcon(genreId: number){
+    switch (genreId) {
+      case 1: return 'fa-masks-theater';
+      case 2: return 'fa-gun';
+      case 3: return 'fa-sack-dollar';
+      case 4: return 'fa-face-grin-beam';
+      case 5: return 'fa-meteor';
+      case 6: return 'fa-dragon';
+      case 7: return '';
+      case 8: return '';
+      case 9: return '';
+
+      default:  return '';
+
+    }
+  }
+}

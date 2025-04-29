@@ -1,0 +1,121 @@
+<!--<div>-->
+<!--  <p *ngFor="let movie of movies">{{movie.title}} {{movie.startDate}}</p>-->
+<!--</div>-->
+<h1>Pretraga</h1>
+
+<div class="form-container">
+  <form class="movie-filter-form" (ngSubmit)="onSubmit()">
+    <div class="filter-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Naziv filma</mat-label>
+        <input matInput [(ngModel)]="searchedTitle" name="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Žanr</mat-label>
+        <mat-select multiple [(ngModel)]="selectedGenres" name="genre">
+          <mat-option [value]="genre" *ngFor="let genre of genres">{{ genre.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Dužina filma</mat-label>
+        <mat-select [(ngModel)]="selectedDuration" name="length">
+          <mat-option [value]="Duration.All">Sve dužine</mat-option>
+          <mat-option [value]="Duration.Short">Kraći od 2 sata</mat-option>
+          <mat-option [value]="Duration.Long">2 sata ili više</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Datum izlaska filma</mat-label>
+        <mat-select [(ngModel)]="selectedReleaseDate" name="releaseDate">
+          <mat-option value="0">Svi datumi</mat-option>
+          <mat-option [value]="pair[0]" *ngFor="let pair of msdArray">
+            {{ Utils.localizeDate(pair[0]) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cena karte</mat-label>
+        <mat-select [(ngModel)]="selectedPrice" name="price">
+          <mat-option value=500>500.00 RSD</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Datum projekcije</mat-label>
+        <mat-select [(ngModel)]="selectedDate" name="projectionDate" (selectionChange)="onDateChange($event.value)">
+          <mat-option [value]="date" *ngFor="let date of projectionDates">{{ date }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Vreme projekcije</mat-label>
+        <mat-select multiple [(ngModel)]="selectedTime" name="projectionTime">
+          <mat-option [value]="time" *ngFor="let time of projectionTimes">{{ time }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Recenzije</mat-label>
+        <mat-select [(ngModel)]="selectedReview" name="review">
+          <mat-option value="r_all">Sve</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Glumci</mat-label>
+        <mat-select multiple [(ngModel)]="selectedActors" name="actors" placeholder="Odaberite glumce">
+          <mat-option *ngFor="let actor of actors" [value]="actor">{{ actor.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Režiseri</mat-label>
+        <mat-select [(ngModel)]="selectedDirector" name="directors" placeholder="Odaberite režisere">
+          <mat-option *ngFor="let director of directors" [value]="director">{{ director.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Primeni filtere</button>
+      <button mat-button type="button" (click)="resetFilters()">Resetuj</button>
+    </div>
+  </form>
+
+
+
+</div>
+
+<!--TODO remove sorting-->
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Ime filma</th>
+    <td mat-cell *matCellDef="let element">{{element.Movie.title}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="hall">
+    <th mat-header-cell *matHeaderCellDef>Sala</th>
+    <td mat-cell *matCellDef="let element">{{element.hallId}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Datum projekcije</th>
+    <td mat-cell *matCellDef="let element">{{element.date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef>Vreme projekcije</th>
+    <td mat-cell *matCellDef="let element">{{element.time}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
