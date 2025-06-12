@@ -1,12 +1,8 @@
-
-
-
 <div class="user-container">
   <div class="user-data">
     <mat-card>
       <mat-card-title></mat-card-title>
       <mat-card-content>
-        <!-- You can add more details here if needed -->
         <h4>{{ user?.firstName }} {{user?.lastName}}</h4>
         <p>{{user?.phoneNumber}}</p>
         <p>{{user?.address}}</p>
@@ -17,38 +13,38 @@
 
   <h2>Izmena podataka</h2>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Ime</mat-label>
     <input matInput type="text" [(ngModel)]="firstName">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Prezime</mat-label>
     <input matInput type="text" [(ngModel)]="lastName">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Mejl adresa</mat-label>
     <input matInput type="email" placeholder="petarpetrovic@popcornium.com" [(ngModel)]="email">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Broj telefona</mat-label>
     <span matPrefix>+381&nbsp;</span>
     <input matInput type="tel" placeholder="" [(ngModel)]="phoneNumber">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Adresa</mat-label>
     <textarea matInput placeholder="" [(ngModel)]="address"></textarea>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Lozinka</mat-label>
     <input matInput type="password" placeholder="" [(ngModel)]="password">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label>Omiljeni žanrovi</mat-label>
     <mat-select multiple [(ngModel)]="favouriteGenres" name="genre">
       <mat-option [value]="genre" *ngFor="let genre of genresSource">{{ genre.name }}</mat-option>
@@ -56,6 +52,6 @@
   </mat-form-field>
 
 
-  <button mat-raised-button (click)="onSubmit()">Izmeni</button>
+  <button mat-raised-button style="background-color: darkred; color: whitesmoke" (click)="onSubmit()">Izmeni</button>
 </div>
 

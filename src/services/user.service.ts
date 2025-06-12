@@ -1,4 +1,5 @@
 import {ModelUser} from "../model/model.user";
+import Swal from "sweetalert2";
 
 export class UserService {
   static loggedUser: ModelUser | null = null
@@ -22,6 +23,11 @@ export class UserService {
     }
 
     return false
+  }
+
+  static logout(){
+    localStorage.removeItem('active')
+    this.loggedUser = null
   }
 
   static initUsers(){
@@ -65,6 +71,13 @@ export class UserService {
         localStorage.setItem('users', JSON.stringify(users))
         localStorage.setItem('active', JSON.stringify(user))
 
+        Swal.fire({
+          title: 'Izvršeno',
+          text: 'Izmene sačuvane!',
+          icon: 'success',
+          timer: 3000,
+          timerProgressBar: true
+        });
         return true
       }
     }

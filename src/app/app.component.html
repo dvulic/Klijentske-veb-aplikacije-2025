@@ -45,6 +45,9 @@
   <a routerLink="/user" *ngIf="UserService.getActiveUser()" mat-button>
     <span class="link-name"><i class="fa-solid fa-user-astronaut"></i> Vaš profil</span>
   </a>
+  <a routerLink="/logout" *ngIf="UserService.getActiveUser()" mat-button>
+    <span class="link-name">Odjava</span>
+  </a>
 </mat-toolbar>
 
 <router-outlet/>
