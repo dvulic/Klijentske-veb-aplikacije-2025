@@ -1,2 +1,2 @@
 # Klijentske-veb-aplikacije-2025
-Front-end project built with AngularJS
+Front-end project built with Angular
