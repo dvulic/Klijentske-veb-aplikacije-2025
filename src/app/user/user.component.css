@@ -1,0 +1,51 @@
+.user-container {
+  max-width: 80%;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+mat-form-field {
+  width: 80%;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  width: 80%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-container h2 {
+  display: flex;
+  justify-content: center;
+}
+.user-data {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-data mat-card {
+  width: 80%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-data mat-card-title {
+  justify-content: center;
+}

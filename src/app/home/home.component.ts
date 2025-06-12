@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {JsonPipe, NgFor, NgIf} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {AxiosError} from "axios";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {ModelMovie} from "../../model/model.movie";
 import {MovieService} from "../../services/movieService";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {RouterLink} from "@angular/router";
+import {MatChip, MatChipSet} from "@angular/material/chips";
 
 
 
@@ -17,7 +19,10 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     NgFor,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    RouterLink,
+    MatChipSet,
+    MatChip
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

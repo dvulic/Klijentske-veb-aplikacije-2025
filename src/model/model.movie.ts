@@ -22,7 +22,7 @@ import {ModelDirector} from "./model.director";
 import {ModelMovieActor} from "./model.movieActor";
 
 export interface ModelMovie {
-  id: number
+  movieId: number
   internalId: string
   corporateId: string
   directorId: number

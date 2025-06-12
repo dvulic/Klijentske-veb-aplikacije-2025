@@ -14,14 +14,13 @@
         {{movie.shortDescription}}
       </p>
 
-      <div class="genres">
-        <button mat-button class="genre-button" *ngFor="let genre of movie.movieGenres">{{genre.genre.name}}</button>
-      </div>
+      <mat-chip-set class="genres">
+        <mat-chip *ngFor="let genre of movie.movieGenres"><p>{{genre.genre.name}}</p></mat-chip>
+      </mat-chip-set>
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button><i class="fa-solid fa-ticket"></i> Dodaj u korpu</button>
-      <a mat-button href="/movie/{{movie.shortUrl}}">Detaljnije</a>
+      <a mat-button class="details-button" [routerLink]="['/movie', movie.shortUrl]"><i class="fa-solid fa-arrow-up-right-from-square"></i> Detaljnije</a>
     </mat-card-actions>
   </mat-card>
 </div>

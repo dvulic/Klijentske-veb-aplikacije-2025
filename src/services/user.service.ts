@@ -15,7 +15,7 @@ export class UserService {
   static login(email: string, password: string): boolean{
     for (let user of this.getUsers()){
       if(user.email === email && user.password === password){
-        localStorage.setItem('active', user.email)
+        localStorage.setItem('active', JSON.stringify(user))
         this.loggedUser = user
         return true
       }
@@ -33,14 +33,42 @@ export class UserService {
         phoneNumber: "+38160123456",
         address: "Jevrejska 14",
         password: "123",
-        favouriteGenres: []
+        favouriteGenres: [],
+        watchedMovies: [],
+        cartItems: []
       }
     ]));
   }
 
   static getActiveUser(): ModelUser | null{
-    if(localStorage.getItem('active')) return null
+    let activeUser = localStorage.getItem('active')
+    if(!activeUser) return null
 
-    return this.loggedUser
+    return JSON.parse(activeUser)
+  }
+
+  static updateUser(oldEmail: string, updatedUser: ModelUser){
+    const users: ModelUser[] = JSON.parse(localStorage.getItem('users') || '[]')
+    if(users.length === 0) return false
+
+    for(let user of users){
+      if(user.email === oldEmail){
+
+        user.email = updatedUser.email
+        user.password = updatedUser.password
+        user.firstName = updatedUser.firstName
+        user.lastName = updatedUser.lastName
+        user.address = updatedUser.address
+        user.phoneNumber = updatedUser.phoneNumber
+        user.favouriteGenres = updatedUser.favouriteGenres
+
+        localStorage.setItem('users', JSON.stringify(users))
+        localStorage.setItem('active', JSON.stringify(user))
+
+        return true
+      }
+    }
+
+    return false
   }
 }

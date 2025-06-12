@@ -1,4 +1,5 @@
 import {ModelGenre} from "./model.genre";
+import {CartItemModel} from "./cart/cartItem.model";
 
 export interface ModelUser {
   firstName: string
@@ -9,6 +10,8 @@ export interface ModelUser {
   address: string
   //Data
   favouriteGenres: ModelGenre[] //Project requirement
-
+  watchedMovies: number[]
+  //Cart
+  cartItems: CartItemModel[]
   password: string
 }

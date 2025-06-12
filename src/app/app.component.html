@@ -3,21 +3,47 @@
 <!--</p>-->
 
 <mat-toolbar>
-  <span><i class="fa-solid fa-bowl-food"></i> Popcornium</span>
+
+  <div class="logo" style="position: relative; width: 1em; height: 1em;">
+    <i class="fas fa-bowl-food" style="color: brown; position: absolute; top: 0; left: 0;"></i>
+
+    <i class="fas fa-bowl-food" style="
+      color: whitesmoke;
+      position: absolute;
+      top: 0;
+      left: 0;
+      clip-path: inset(0 0 50% 0);
+    "></i>
+  </div>
+  <a [routerLink]="['/']" style="color: white; text-decoration-line: none">Popcornium</a>
+
   <span class="spacer"></span>
 
   <a routerLink="/" mat-button>
-    <span class="link-name">Home</span>
+    <span class="link-name">Početna</span>
   </a>
   <a routerLink="/about" mat-button>
-    <span class="link-name">About</span>
+    <span class="link-name">O bioskopu</span>
   </a>
   <a routerLink="/search" mat-button>
     <span class="link-name">Pretraga</span>
   </a>
-
-  <a routerLink="/login" mat-button>
+  <a routerLink="/login" *ngIf="!UserService.getActiveUser()" mat-button>
     <span class="link-name">Prijava</span>
+  </a>
+  <a routerLink="/cart" mat-button>
+    <span *ngIf="cartItemCount > 0"
+        class="link-name" [matBadge]="cartItemCount"
+          matBadgePosition="above after"
+          matBadgeOverlap="false"><i
+        class="fa-solid fa-cart-shopping fa-flip-horizontal"></i> Korpa
+    </span>
+    <span *ngIf="cartItemCount == 0" class="link-name"><i
+        class="fa-solid fa-cart-shopping fa-flip-horizontal"></i> Korpa
+    </span>
+  </a>
+  <a routerLink="/user" *ngIf="UserService.getActiveUser()" mat-button>
+    <span class="link-name"><i class="fa-solid fa-user-astronaut"></i> Vaš profil</span>
   </a>
 </mat-toolbar>
 

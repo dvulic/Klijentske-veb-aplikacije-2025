@@ -2,7 +2,33 @@
   flex: 1 1 auto;
 }
 
-mat-toolbar{
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+  backdrop-filter: blur(10px);         /* blur behind */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+
+  color: whitesmoke;
+  padding: 0 16px;
+
+  border-bottom: 1px;
+  border-color: #383838;
+}
+
+
+.logo {
+  margin-right: 3px;
+}
+
+span {
+  color: white;
 }

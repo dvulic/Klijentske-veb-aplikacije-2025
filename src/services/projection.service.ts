@@ -2,9 +2,10 @@ import {HallModel} from "../model/projection/hall.model";
 import {ProjectionModel} from "../model/projection/projection.model";
 import {ModelMovie} from "../model/model.movie";
 import {Utils} from "../app/utils/utils";
-import {distinct} from "rxjs";
 import {ProjectionSearchFilters} from "../model/projection/projectionSearchFilter.model";
 import {Duration} from "../app/search/duration.enum";
+import {GradesService} from "./grades.service";
+import {GradeEnum} from "../app/search/grade.enum";
 
 export class ProjectionService {
   //Use if no projections array is in LocalStorage, it will book
@@ -61,15 +62,12 @@ export class ProjectionService {
             currentDate.setMinutes(currentDate.getMinutes() + (runtimeWithBreaks % 60));
             projectionCounter++;
           }
-
-          console.log(moviesCopy)
-          console.log(hall.id)
         }
         startDate.setHours(10, 0, 0, 0)
         startDate.setDate(startDate.getDate() + 1)
     }
 
-    localStorage.setItem('halls', JSON.stringify(halls))
+    // localStorage.setItem('halls', JSON.stringify(halls))
     localStorage.setItem('projections', JSON.stringify(projections))
   }
 
@@ -87,6 +85,25 @@ export class ProjectionService {
     return projections
   }
 
+  static getProjectionsForMovie(movieId: number, filterByTime?: boolean): ProjectionModel[] {
+    if (localStorage.getItem('projections') === null) return [];
+
+    let projections: ProjectionModel[] = JSON.parse(localStorage.getItem('projections')!);
+
+    projections = projections.filter(p => p.Movie.movieId === movieId);
+
+    if (!filterByTime) return projections
+
+    const now = new Date();
+    return projections.filter(projection => {
+      const [day, month, year] = projection.date.split('.');
+      const projectionDateTime = new Date(`${year}-${month}-${day}T${projection.time}`);
+      return projectionDateTime > now;
+    })
+  }
+
+
+
   static searchProjections(filters: ProjectionSearchFilters): ProjectionModel[] {
     return this.getProjections().filter(p => {
       if (filters.searchedTitle && !p.Movie.title.toLowerCase().includes(filters.searchedTitle.toLowerCase())) return false;
@@ -102,10 +119,20 @@ export class ProjectionService {
       if (filters.selectedDate && p.date !== filters.selectedDate) return false;
       if (filters.selectedTime && filters.selectedTime.length && !filters.selectedTime.includes(p.time)) return false;
 
-      if (filters.selectedActors.length && !filters.selectedActors.every(id =>
-          p.Movie.movieActors.some(a => a.actor.actorId === id.actorId))) return false;
+      //Some actors
+      if (filters.selectedActors.length && !p.Movie.movieActors.some(a =>
+          filters.selectedActors.some(id => id.actorId === a.actor.actorId))) return false;
+
+      //All selected actors
+      // if (filters.selectedActors.length && !filters.selectedActors.every(id =>
+      //     p.Movie.movieActors.some(a => a.actor.actorId === id.actorId))) return false;
 
       if (filters.selectedDirector && filters.selectedDirector.directorId !== (p.Movie.director.directorId)) return false;
+
+      if(filters.selectedReview
+          && filters.selectedReview !== GradeEnum.GR_1
+          && filters.selectedReview > GradesService.getAverageGrade(undefined, p.Movie.movieId)
+      ) return false;
 
       if (filters.selectedGenres.length && !filters.selectedGenres.every(id =>
           p.Movie.movieGenres.some(g => g.genreId === id.genreId))) return false;
@@ -113,5 +140,7 @@ export class ProjectionService {
       return true;
     });
   }
+
+
 
 }

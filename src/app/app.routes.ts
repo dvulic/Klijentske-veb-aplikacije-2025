@@ -5,6 +5,8 @@ import {SearchComponent} from "./search/search.component";
 import {DetailsComponent} from "./details/details.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {UserComponent} from "./user/user.component";
+import {CartComponent} from "./cart/cart.component";
 
 export const routes: Routes = [
   {path: '', component : HomeComponent},
@@ -13,5 +15,7 @@ export const routes: Routes = [
   {path : 'movie/:shortUrl', component: DetailsComponent},
   {path : 'login', component : LoginComponent },
   {path : 'register', component : RegisterComponent },
+  {path : 'user', component : UserComponent },
+  {path : 'cart', component : CartComponent },
   {path : '**', redirectTo: ''}
 ];

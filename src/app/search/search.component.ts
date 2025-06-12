@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ModelMovie} from "../../model/model.movie";
 import {MovieService} from "../../services/movieService";
@@ -27,7 +27,8 @@ import {
   MatTable,
   MatTableDataSource
 } from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
+import {GradeEnum} from "./grade.enum";
+import {RouterLink} from "@angular/router";
 
 
 @Component({
@@ -46,7 +47,6 @@ import {MatSort} from "@angular/material/sort";
     MatButton,
     MatTable,
     MatHeaderCell,
-    MatSort,
     MatColumnDef,
     MatCell,
     MatHeaderCellDef,
@@ -55,6 +55,7 @@ import {MatSort} from "@angular/material/sort";
     MatRow,
     MatRowDef,
     MatHeaderRowDef,
+    RouterLink,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
@@ -67,7 +68,7 @@ export class SearchComponent{
   selectedDuration: Duration = Duration.All
   selectedReleaseDate: string | null = null
   selectedPrice: number | null = null
-  selectedReview: string | null = null //TODO Finish review
+  selectedReview: GradeEnum | null = null
   public genres: ModelGenre[] | null = null
   public selectedGenres: ModelGenre[] = []
   public directors: ModelDirector[] | null = null
@@ -81,7 +82,7 @@ export class SearchComponent{
   public msdArray: [string, number][] | null = null
   public error : string | null = null
   //Table
-  displayedColumns: string[] = ['title', 'hall', 'date', 'time'];
+  displayedColumns: string[] = ['title', 'hall', 'date', 'time', 'action'];
   dataSource = new MatTableDataSource<ProjectionModel>([]);
 
   constructor() {
@@ -131,6 +132,7 @@ export class SearchComponent{
     this.selectedActors = [];
     this.selectedDirector = null;
     this.selectedGenres = [];
+    this.selectedReview = null;
 
     this.dataSource.data = []
   }
@@ -147,12 +149,11 @@ export class SearchComponent{
       selectedActors: this.selectedActors,
       selectedDirector: this.selectedDirector,
       selectedGenres: this.selectedGenres,
+      selectedReview: this.selectedReview
     };
 
     this.dataSource.data = ProjectionService.searchProjections(filters)
   }
-
-
 
   private getDistinctReleaseDates(movies: ModelMovie[] | null): [string, number][] | null{
     if(movies === null) return null
@@ -177,4 +178,5 @@ export class SearchComponent{
 
   protected readonly Utils = Utils;
   protected readonly Duration = Duration;
+  protected readonly GradeEnum = GradeEnum;
 }

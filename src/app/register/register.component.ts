@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
-import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatIcon} from "@angular/material/icon";
+import {MatButton} from "@angular/material/button";
 import {UserService} from "../../services/user.service";
 import {ModelGenre} from "../../model/model.genre";
+import {CartItemModel} from "../../model/cart/cartItem.model";
 
 
 @Component({
@@ -28,6 +28,8 @@ export class RegisterComponent {
   address: string = '';
   password: string = '';
   favouriteGenres: ModelGenre[] = []
+  watchedMovies: number[] = []
+  cartItems: CartItemModel[] = []
 
   hidePassword: boolean = true;
 
@@ -41,7 +43,9 @@ export class RegisterComponent {
           phoneNumber: this.phoneNumber,
           address: this.address,
           password: this.password,
-          favouriteGenres: this.favouriteGenres
+          favouriteGenres: this.favouriteGenres,
+          watchedMovies: this.watchedMovies,
+          cartItems: this.cartItems
         }
     )
 

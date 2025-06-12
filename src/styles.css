@@ -1,7 +1,11 @@
 html, body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100%;
-  background-color: antiquewhite;
+  background-color: #111; /*#212121*/
+}
+
+body {
+  padding-top: 64px;
 }
 
 /*h1, h2, h3, h4, h5, h6, a, p, span {*/
@@ -11,4 +15,13 @@ html, body {
 mat-button{
   color: white !important;
 }
+
+
+:root {
+  --color-primary: #3f51b5;
+  --color-secondary: #f50057;
+  --color-accent: #4caf50;
+  --color-background: #f9f9f9;
+}
+
 

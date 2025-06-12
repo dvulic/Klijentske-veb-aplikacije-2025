@@ -1,0 +1,59 @@
+.cart-card{
+  width: 80%;
+  height: auto;
+  margin: 16px auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px !important;
+  color: white;
+  background-color: #383838 !important;
+
+  padding: 10px;
+}
+
+.empty-cart {
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  justify-content: center;
+  display: flex;
+}
+
+mat-stepper {
+  padding: 10px;
+  background-color: #212121 !important;
+}
+.mat-step-icon-selected {
+  background-color: #6AB7F6 !important;
+}
+
+.payment-stepper {
+  background-color: #212121 !important;
+}
+
+
+.total-amount-notif{
+  font-weight: 1.1;
+  margin: 10px;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+table {
+  background-color: #383838;
+}
+
+.table-header {
+  color: #6AB7F6;
+  font-weight: 500;
+}
+
+.cell-content{
+  color: #ddd;
+  text-decoration: none;
+}

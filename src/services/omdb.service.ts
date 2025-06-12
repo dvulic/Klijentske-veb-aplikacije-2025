@@ -18,7 +18,7 @@ export class OmdbService {
       url : '/grade',
       method : "GET",
       params : {
-        'movie' : movieName,
+        'movie' : encodeURIComponent(movieName),
         'year' : releaseYear
       }
     })
