@@ -7,8 +7,8 @@ import {ModelMovie} from "../../model/model.movie";
 import {MovieService} from "../../services/movieService";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {RouterLink} from "@angular/router";
-import {MatChip, MatChipSet} from "@angular/material/chips";
-
+import {MatChip, MatChipListbox, MatChipSet} from "@angular/material/chips";
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -22,19 +22,31 @@ import {MatChip, MatChipSet} from "@angular/material/chips";
     MatProgressSpinner,
     RouterLink,
     MatChipSet,
-    MatChip
+    MatChip,
+    MatChipListbox,
+    MatIconModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   public movies: ModelMovie[] | null = null
+  public newestMovies: ModelMovie[] | null = null
   public error : string | null = null
 
   constructor() {
     MovieService.getMovies()
     .then(
-        rsp => this.movies = rsp.data
+        rsp => {
+          this.movies = rsp.data
+          // @ts-ignore
+          const sortedMovies = [...this.movies].sort((a, b) => {
+            return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+          });
+          // @ts-ignore
+          this.movies = this.movies?.splice(8, this.movies?.length)
+          this.newestMovies = sortedMovies.slice(0, 8);
+        }
     )
     .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`)
   }

@@ -1,3 +1,148 @@
+/* General Section Styling */
+.homepage-section {
+  margin: 2rem 0;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  justify-content: center;
+  display: flex;
+}
+
+
+.new-releases-container {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.scroll-wrapper {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ff4081 #303030; /* Firefox */
+}
+
+
+.scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: #424242;
+  border-radius: 10px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ff4081;
+  border-radius: 10px;
+}
+
+
+.movie-card-wrapper {
+  flex-shrink: 0;
+  width: 280px;
+  margin-right: 1.5rem;
+}
+
+.movie-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #424242;
+  border: none;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 20%, rgba(0, 0, 0, 0));
+  color: white;
+  padding: 1rem;
+  transform: translateY(65%);
+  transition: transform 0.35s ease-in-out;
+}
+
+.movie-card:hover .card-overlay {
+  transform: translateY(0);
+}
+
+.movie-card .mat-card-header {
+  padding: 0 0 8px 0;
+}
+
+.movie-card .mat-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-card .mat-card-content {
+  padding: 0;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.movie-description {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.genres {
+  margin-bottom: 1rem;
+}
+
+.movie-card .mat-chip {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  min-height: 24px;
+
+}
+
+.movie-card mat-chip p{
+  color: whitesmoke !important;
+}
+
+.movie-card mat-card-actions {
+  padding: 0;
+  display: flex;
+}
+
+.movie-card mat-card-actions .mat-mdc-button-persistent-ripple {
+  width: 100%;
+}
+
+.movie-card mat-card-actions .mat-icon {
+  margin-right: 8px;
+}
+
+/*------------*/
+
 .movieList {
   display: flex;
   flex-wrap: wrap;

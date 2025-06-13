@@ -1,6 +1,39 @@
 <div class="spinner-container" *ngIf="!movies && !error">
   <mat-spinner diameter="200"></mat-spinner>
-  <h3>Prikupljamo podatke o filmovima...</h3>
+  <h3 style="color: mintcream; ">Prikupljamo podatke o filmovima...</h3>
+</div>
+
+<div class="homepage-section">
+  <h2 class="section-title" style="color: mintcream">Najnovije u bioskopima</h2>
+  <div class="new-releases-container">
+    <div class="scroll-wrapper">
+      <div *ngFor="let movie of newestMovies" class="movie-card-wrapper">
+        <mat-card class="movie-card" appearance="outlined">
+          <img mat-card-image src="{{movie.poster}}" alt="Poster for {{movie.title}}" class="movie-poster">
+
+          <div class="card-overlay">
+            <mat-card-header>
+              <mat-card-title>{{movie.title}}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p class="movie-description">{{movie.shortDescription}}</p>
+              <mat-chip-listbox class="genres">
+                <mat-chip *ngFor="let genre of movie.movieGenres" style="color: mintcream"><p>{{genre.genre.name}}</p></mat-chip>
+              </mat-chip-listbox>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <a mat-flat-button style="background-color: darkred; color: whitesmoke;" [routerLink]="['/movie', movie.shortUrl]">
+                <mat-icon>open_in_new</mat-icon>
+                Detaljnije
+              </a>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="movieList" *ngIf="movies">
