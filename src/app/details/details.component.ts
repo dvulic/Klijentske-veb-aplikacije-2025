@@ -27,7 +27,6 @@ import {MatDivider} from "@angular/material/divider";
 import Swal from "sweetalert2";
 import {TrailerService} from "../../services/trailer.service";
 import {OmdbService} from "../../services/omdb.service";
-import {MatChip, MatChipSet} from "@angular/material/chips";
 
 
 @Component({
@@ -85,6 +84,8 @@ export class DetailsComponent {
       this.movie = rsp.data;
 
       if(this.movie === null) return
+      //TODO uncomment code below to load trailers and grades using APIs if you have keys
+
       // //Getting movie trailer
       // TrailerService.getMovieTrailer(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
       // .then(r => {

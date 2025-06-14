@@ -1,4 +1,4 @@
-/* General Section Styling */
+
 .homepage-section {
   margin: 2rem 0;
 }
@@ -204,6 +204,7 @@ mat-chip p{
 }
 
 
-mat-spinner {
-  color: whitesmoke;
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: darkred !important;
 }

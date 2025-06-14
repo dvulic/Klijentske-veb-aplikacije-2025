@@ -49,8 +49,9 @@ export class ProjectionService {
               hallId: hall.id,
               id: projectionCounter,
               price: 500,
-              time: currentDate.toLocaleTimeString('eu-RS'),
+              time: currentDate.toLocaleTimeString('sr-RS'),
             };
+
 
             hall.projections.push(projection);
             projections.push(projection);
@@ -86,20 +87,26 @@ export class ProjectionService {
   }
 
   static getProjectionsForMovie(movieId: number, filterByTime?: boolean): ProjectionModel[] {
-    if (localStorage.getItem('projections') === null) return [];
+    if (localStorage.getItem('projections') === null) {
+      return [];
+    }
 
     let projections: ProjectionModel[] = JSON.parse(localStorage.getItem('projections')!);
 
     projections = projections.filter(p => p.Movie.movieId === movieId);
 
-    if (!filterByTime) return projections
+    if (!filterByTime) {
+      return projections
+    }
 
     const now = new Date();
-    return projections.filter(projection => {
-      const [day, month, year] = projection.date.split('.');
-      const projectionDateTime = new Date(`${year}-${month}-${day}T${projection.time}`);
-      return projectionDateTime > now;
+
+    projections = projections.filter(projection => {
+      const projectionDateTime = this.createDate(projection.date, projection.time)
+      if(projectionDateTime !== null) return projectionDateTime > now;
+      return
     })
+    return projections
   }
 
 
@@ -139,6 +146,27 @@ export class ProjectionService {
 
       return true;
     });
+  }
+
+  private static createDate(datestring : string, timestring: string): Date | null{
+    const dateParts = datestring.split('.').filter(p => p.trim() !== '');
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10);
+    const year = parseInt(dateParts[2], 10);
+
+    const timeParts = timestring.split(/:|\./);
+    const hour = parseInt(timeParts[0], 10);
+    const minute = parseInt(timeParts[1], 10);
+    const second = parseInt(timeParts[2], 10);
+
+    const projectionDateTime = new Date(year, month - 1, day, hour, minute, second);
+
+    if (isNaN(projectionDateTime.getTime())) {
+      console.error("Could not create a valid date from:", datestring);
+      return null;
+    }
+
+    return projectionDateTime;
   }
 
 

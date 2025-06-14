@@ -1,5 +1,16 @@
 export class Utils{
   static localizeDate(dateString: string){
+    if (dateString.includes("/")) { //Stupid chrome edge case because it can't parse dd.mm.yyyy
+      const parts = dateString.split('/');
+
+      if (parts.length === 3) {
+        const day = parts[0];
+        const month = parts[1];
+        const year = parts[2];
+
+        dateString = `${year}-${month}-${day}`;
+      }
+    }
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       day: '2-digit',

@@ -1,9 +1,9 @@
 <div class="spinner-container" *ngIf="!movies && !error">
-  <mat-spinner diameter="200"></mat-spinner>
+  <mat-spinner diameter="200" color="warn"></mat-spinner>
   <h3 style="color: mintcream; ">Prikupljamo podatke o filmovima...</h3>
 </div>
 
-<div class="homepage-section">
+<div class="homepage-section" *ngIf="movies">
   <h2 class="section-title" style="color: mintcream">Najnovije u bioskopima</h2>
   <div class="new-releases-container">
     <div class="scroll-wrapper">

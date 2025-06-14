@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+.about-us-container {
+  --background-color: #121212;
+  --card-background-color: #1e1e1e;
+  --card-border-color: #383838;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #b0b0b0;
+  --accent-color: #00bfff;
+  --gold-accent: #ffd700;
+  --font-family: 'Poppins', sans-serif;
+
+  padding: 40px 24px;
+  max-width: 960px;
+  margin: 0 auto;
+  font-family: var(--font-family), serif;
+  background-color: var(--background-color);
+  color: var(--secondary-text-color);
+}
+
+.about-us-header {
+  text-align: center;
+  margin-bottom: 60px;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, darkred, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+  }
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+}
+
+.about-section {
+  background-color: var(--card-background-color);
+  color: var(--secondary-text-color);
+  margin-bottom: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  ::ng-deep .mat-mdc-card-header {
+    padding: 24px;
+  }
+
+  [mat-card-title] {
+    color: var(--primary-text-color);
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+}
+
+.mission-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+
+  mat-icon {
+    font-size: 2.5rem;
+    color: var(--gold-accent);
+    width: 40px;
+    height: 40px;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+address {
+  font-style: normal;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.about-section mat-divider {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-section a[mat-flat-button] {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  background-color: var(--accent-color);
+  color: var(--primary-text-color);
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--gold-accent);
+  }
+}
