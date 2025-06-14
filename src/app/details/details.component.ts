@@ -94,11 +94,17 @@ export class DetailsComponent {
       .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`);
 
       //Movie omdb grades
-      OmdbService.getMovieGrades(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
-      .then(r => {
-        this.grades = r.data
-        this.grades?.otherRatings.shift()
-      })
+      try {
+        OmdbService.getMovieGrades(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
+        .then(r => {
+          this.grades = r.data
+          this.grades?.otherRatings.shift()
+        })
+        .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`);
+      }catch (error) {
+        console.error("Failed to get movie grades:", error);
+      }
+
       //Local grades
       this.localGrades = GradesService.getMovieGradesData(this.movie.movieId)
       if(this.localGrades.length > 0)

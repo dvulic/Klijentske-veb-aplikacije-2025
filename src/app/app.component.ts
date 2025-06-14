@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
     if(!localStorage.getItem('projections')){
       let movies: ModelMovie[] = []
       MovieService.getMovies().then(rsp => {
-        movies = rsp.data
+        movies = rsp.data.reverse() //Newest movies first
         ProjectionService.initProjections(movies)
       })
       .catch((e: AxiosError) => console.log(`${e.code}: ${e.message}`));

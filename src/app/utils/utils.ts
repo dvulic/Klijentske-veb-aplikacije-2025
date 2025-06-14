@@ -1,15 +1,16 @@
 export class Utils{
   static localizeDate(dateString: string){
+
     if (dateString.includes("/")) { //Stupid chrome edge case because it can't parse dd.mm.yyyy
       const parts = dateString.split('/');
 
-      if (parts.length === 3) {
-        const day = parts[0];
-        const month = parts[1];
-        const year = parts[2];
-
-        dateString = `${year}-${month}-${day}`;
+      let year, month, day;
+      if (parts[0].length === 4) {
+        [year, month, day] = parts;
+      } else if (parts[2].length === 4) {
+        [day, month, year] = parts;
       }
+      dateString = `${year}-${month}-${day}`;
     }
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
@@ -18,7 +19,8 @@ export class Utils{
       year: 'numeric',
     };
 
-    return new Intl.DateTimeFormat('sr-RS', options).format(date);
+    const formatted = new Intl.DateTimeFormat('sr-RS', options).format(date);
+    return formatted;
   }
 
   static extractYear(dateString: string): number {

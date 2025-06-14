@@ -40,7 +40,7 @@ export class HomeComponent {
         rsp => {
           this.movies = rsp.data
 
-          if(this.movies == null)       throw new Error("Movie data is not available.");
+          if(this.movies == null) throw new Error("Movie data is not available.");
           const sortedMovies = [...this.movies].sort((a, b) => {
             return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
           });
