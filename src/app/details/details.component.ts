@@ -86,19 +86,19 @@ export class DetailsComponent {
       if(this.movie === null) return
       //TODO uncomment code below to load trailers and grades using APIs if you have keys
 
-      // //Getting movie trailer
-      // TrailerService.getMovieTrailer(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
-      // .then(r => {
-      //   this.trailer = TrailerService.getEmbedLink(r.data.videoId)
-      // })
-      // .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`);
-      //
-      // //Movie omdb grades
-      // OmdbService.getMovieGrades(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
-      // .then(r => {
-      //   this.grades = r.data
-      //   this.grades?.otherRatings.shift()
-      // })
+      //Getting movie trailer
+      TrailerService.getMovieTrailer(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
+      .then(r => {
+        this.trailer = TrailerService.getEmbedLink(r.data.videoId)
+      })
+      .catch((e: AxiosError) => this.error = `${e.code}: ${e.message}`);
+
+      //Movie omdb grades
+      OmdbService.getMovieGrades(this.movie.originalTitle, Utils.extractYear(this.movie.startDate))
+      .then(r => {
+        this.grades = r.data
+        this.grades?.otherRatings.shift()
+      })
       //Local grades
       this.localGrades = GradesService.getMovieGradesData(this.movie.movieId)
       if(this.localGrades.length > 0)
