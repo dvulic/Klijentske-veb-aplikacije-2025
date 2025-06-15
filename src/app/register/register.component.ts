@@ -6,6 +6,7 @@ import {MatButton} from "@angular/material/button";
 import {UserService} from "../../services/user.service";
 import {ModelGenre} from "../../model/model.genre";
 import {CartItemModel} from "../../model/cart/cartItem.model";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -31,9 +32,36 @@ export class RegisterComponent {
   watchedMovies: number[] = []
   cartItems: CartItemModel[] = []
 
-  hidePassword: boolean = true;
+
+  validateEntries(): boolean {
+    const isEmpty = (str: string | null | undefined) => !str || str.trim().length === 0;
+
+    if (isEmpty(this.firstName) ||
+        isEmpty(this.lastName) ||
+        isEmpty(this.email) ||
+        isEmpty(this.phoneNumber) ||
+        isEmpty(this.address) ||
+        isEmpty(this.password)) {
+      return false;
+    }
+
+    if (this.password && this.password.length < 3) {
+      return false;
+    }
+    return true;
+  }
 
   onSubmit() {
+    if(!this.validateEntries()){
+      Swal.fire({
+        title: 'Greška',
+        text: 'Registracija neuspela. Proverite podatke i pokušajte ponovo.',
+        icon: 'error',
+        timer: 3000,
+        timerProgressBar: true
+      });
+      return
+    }
     let users = UserService.getUsers()
     users.push(
         {
@@ -50,10 +78,12 @@ export class RegisterComponent {
     )
 
     localStorage.setItem('users', JSON.stringify(users))
-
-  }
-
-  togglePasswordVisibility() {
-    this.hidePassword = !this.hidePassword;
+    Swal.fire({
+      title: 'Uspesna prijava',
+      text: 'Dobrodošli! Vaša priajva je uspešna i možete otići na stranu za prijavu.',
+      icon: 'success',
+      timer: 3000,
+      timerProgressBar: true
+    });
   }
 }
